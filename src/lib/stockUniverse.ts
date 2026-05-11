@@ -1,0 +1,22 @@
+export const STOCK_UNIVERSE = [
+  { symbol: "AAPL", name: "Apple Inc.", domain: "apple.com" },
+  { symbol: "MSFT", name: "Microsoft Corp.", domain: "microsoft.com" },
+  { symbol: "TSLA", name: "Tesla, Inc.", domain: "tesla.com" },
+  { symbol: "NVDA", name: "NVIDIA Corp.", domain: "nvidia.com" },
+  { symbol: "AMZN", name: "Amazon.com, Inc.", domain: "amazon.com" },
+  { symbol: "META", name: "Meta Platforms", domain: "meta.com" },
+  { symbol: "GOOGL", name: "Alphabet Inc.", domain: "google.com" },
+  { symbol: "AMD", name: "Advanced Micro Devices", domain: "amd.com" },
+  { symbol: "NFLX", name: "Netflix, Inc.", domain: "netflix.com" },
+  { symbol: "INTC", name: "Intel Corp.", domain: "intel.com" },
+  { symbol: "UBER", name: "Uber Technologies", domain: "uber.com" },
+  { symbol: "SPY", name: "SPDR S&P 500 ETF", domain: "state street" },
+  { symbol: "QQQ", name: "Invesco QQQ Trust", domain: "invesco.com" },
+  { symbol: "BABA", name: "Alibaba Group", domain: "alibaba.com" },
+  { symbol: "DIS", name: "Walt Disney Co.", domain: "disney.com" },
+  { symbol: "JPM", name: "JPMorgan Chase", domain: "jpmorganchase.com" },
+  { symbol: "V", name: "Visa Inc.", domain: "visa.com" },
+  { symbol: "MA", name: "Mastercard Inc.", domain: "mastercard.com" },
+  { symbol: "COIN", name: "Coinbase Global", domain: "coinbase.com" },
+  { symbol: "PLTR", name: "Palantir Technologies", domain: "palantir.com" }
+];
