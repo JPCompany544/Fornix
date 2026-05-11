@@ -51,9 +51,13 @@ export function usePortfolioState(userId: string | undefined) {
   const fetchTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const performFetch = useCallback(async () => {
-    if (!userId) return;
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setSyncError(false);
+    console.log("[Fornix] Initiating Authoritative Context Sync for:", userId);
 
     let attempts = 0;
     const maxAttempts = 3;

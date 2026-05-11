@@ -89,9 +89,9 @@ const FinorHeader = () => {
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => setDepositOpen(true)}
-                        disabled={loading || !portfolio?.id}
+                        disabled={loading || !user?.id}
                         className={`flex items-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all shadow-lg active:scale-95 ${
-                            loading || !portfolio?.id 
+                            loading || !user?.id 
                             ? 'bg-slate-100 text-slate-400 cursor-not-allowed shadow-none' 
                             : 'bg-slate-900 text-white hover:bg-black shadow-slate-900/10'
                         }`}

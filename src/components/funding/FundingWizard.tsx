@@ -19,8 +19,55 @@ interface FundingWizardProps {
     userId: string | undefined;
 }
 
-const FundingWizard: React.FC<FundingWizardProps> = ({ onClose, portfolioId, userId }) => {
+const FundingWizard: React.FC<FundingWizardProps> = ({ onClose, portfolioId: initialPortfolioId, userId }) => {
     const { supabase } = useAuth();
+    const [portfolioId, setPortfolioId] = useState<string | undefined>(initialPortfolioId);
+    const [isProvisioning, setIsProvisioning] = useState(!initialPortfolioId);
+
+    // ── Identity Reconciliation ──────────────────────────────
+    useEffect(() => {
+        if (initialPortfolioId) {
+            setPortfolioId(initialPortfolioId);
+            setIsProvisioning(false);
+            return;
+        }
+
+        const reconcileIdentity = async () => {
+            if (!userId) return;
+            console.log("[Fornix] Portfolio missing in wizard. Attempting late-stage reconciliation...");
+            
+            // 1. Try Find
+            const { data: existing } = await supabase
+                .from('portfolios')
+                .select('id')
+                .eq('user_id', userId)
+                .single();
+            
+            if (existing) {
+                setPortfolioId(existing.id);
+                setIsProvisioning(false);
+                return;
+            }
+
+            // 2. Try Provision
+            const { data: provisioned, error: pErr } = await supabase
+                .from('portfolios')
+                .insert([{ user_id: userId, cash_balance: 0, total_value: 0 }])
+                .select('id')
+                .single();
+            
+            if (provisioned) {
+                setPortfolioId(provisioned.id);
+                setIsProvisioning(false);
+            } else {
+                console.error("[Fornix] Late-stage reconciliation failed:", pErr);
+                // We keep isProvisioning true to show an error or retry state if needed, 
+                // but for now we'll just log it.
+            }
+        };
+
+        reconcileIdentity();
+    }, [initialPortfolioId, userId, supabase]);
 
     // ── Wizard State ──────────────────────────────────────────
     const [step, setStep] = useState(1);
@@ -103,6 +150,21 @@ const FundingWizard: React.FC<FundingWizardProps> = ({ onClose, portfolioId, use
     };
 
     // ── Render Helpers ────────────────────────────────────────
+    if (isProvisioning) {
+        return (
+            <div className="flex flex-col items-center justify-center p-12 text-center h-full space-y-6">
+                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center border border-slate-100">
+                    <Loader2 className="w-8 h-8 text-slate-400 animate-spin" />
+                </div>
+                <div className="space-y-2">
+                    <h2 className="text-xl font-black text-slate-900 tracking-tight">Syncing Context</h2>
+                    <p className="text-xs text-slate-500 font-medium max-w-xs mx-auto">
+                        We are preparing your institutional capital channel. This will only take a moment.
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     if (isSuccess) {
         return (
