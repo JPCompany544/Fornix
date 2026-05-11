@@ -510,17 +510,17 @@ export default function LandingPage() {
           </div>
           <div className="w-full lg:w-[50%] flex flex-col space-y-10">
             {[
-              { icon: <Target />, title: "Audit-ready Ledger", desc: "Ensuring every transaction is traceable and secure." },
-              { icon: <Compass />, title: "Portfolio Operations", desc: "Secure management of diverse asset classes." },
-              { icon: <Zap />, title: "Production Architecture", desc: "Built for today’s technology, not legacy assumptions." }
-            ].map((point, index) => (
+              { icon: Target, title: "Audit-ready Ledger", desc: "Ensuring every transaction is traceable and secure." },
+              { icon: Compass, title: "Portfolio Operations", desc: "Secure management of diverse asset classes." },
+              { icon: Zap, title: "Production Architecture", desc: "Built for today’s technology, not legacy assumptions." }
+            ].map(({ icon: Icon, title, desc }, index) => (
               <div key={index} className="flex items-start gap-6 group">
                 <div className="mt-1 p-3 rounded-2xl bg-white border border-slate-100 shadow-sm group-hover:border-[#4A0E8A]/20 transition-all">
-                  {React.cloneElement(point.icon as React.ReactElement, { className: "w-6 h-6 text-[#4A0E8A]" })}
+                  <Icon className="w-6 h-6 text-[#4A0E8A]" />
                 </div>
                 <div className="flex flex-col">
-                  <h3 className="text-xl font-black text-slate-900 tracking-tight leading-tight">{point.title}</h3>
-                  <p className="mt-2 text-sm md:text-base text-slate-500 font-bold uppercase tracking-widest text-[10px]">{point.desc}</p>
+                  <h3 className="text-xl font-black text-slate-900 tracking-tight leading-tight">{title}</h3>
+                  <p className="mt-2 text-sm md:text-base text-slate-500 font-bold uppercase tracking-widest text-[10px]">{desc}</p>
                 </div>
               </div>
             ))}
