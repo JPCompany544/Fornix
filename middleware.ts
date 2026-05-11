@@ -41,6 +41,11 @@ export async function middleware(req: NextRequest) {
 
   // 2. ADMIN PROTECTION (Auth + Role)
   if (req.nextUrl.pathname.startsWith('/admin')) {
+    // Exempt the login page itself
+    if (req.nextUrl.pathname === '/admin/login') {
+      return res
+    }
+
     if (!session) {
       return NextResponse.redirect(new URL('/auth/Login', req.url))
     }
