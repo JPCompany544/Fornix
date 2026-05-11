@@ -7,10 +7,12 @@ import WithdrawalWizard from '../withdrawal/WithdrawalWizard';
 interface WithdrawalModalProps {
     isOpen: boolean;
     onClose: () => void;
-    userId: string;
-    portfolioId: string;
+    userId: string | undefined;
+    portfolioId: string | undefined;
     availableToWithdraw: number;
     pendingWithdrawalsTotal: number;
+    syncError?: boolean;
+    onRefresh?: () => Promise<void>;
 }
 
 const WithdrawalModal: React.FC<WithdrawalModalProps> = ({ 

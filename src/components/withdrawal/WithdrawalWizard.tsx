@@ -13,8 +13,8 @@ export type WithdrawalMethod = 'crypto' | 'bank' | null;
 
 interface WithdrawalWizardProps {
     onClose: () => void;
-    portfolioId: string;
-    userId: string;
+    portfolioId: string | undefined;
+    userId: string | undefined;
     availableToWithdraw: number;
     pendingWithdrawalsTotal: number;
 }

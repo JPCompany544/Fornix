@@ -15,8 +15,8 @@ export type FundingMethod = 'crypto' | 'bank' | null;
 
 interface FundingWizardProps {
     onClose: () => void;
-    portfolioId: string;
-    userId: string;
+    portfolioId: string | undefined;
+    userId: string | undefined;
 }
 
 const FundingWizard: React.FC<FundingWizardProps> = ({ onClose, portfolioId, userId }) => {

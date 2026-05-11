@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { 
     Bell, Settings, LogOut, Plus, Menu, X, 
     LayoutGrid, BarChart3, Briefcase, Activity, 
-    ArrowUpRight, ShieldCheck, User 
+    ArrowUpRight, ShieldCheck, User, Loader2
 } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { usePortfolioState } from '@/hooks/usePortfolioState';

@@ -7,8 +7,10 @@ import FundingWizard from '../funding/FundingWizard';
 interface DepositModalProps {
     isOpen: boolean;
     onClose: () => void;
-    portfolioId: string;
-    userId: string;
+    portfolioId: string | undefined;
+    userId: string | undefined;
+    syncError?: boolean;
+    onRefresh?: () => Promise<void>;
 }
 
 const DepositModal: React.FC<DepositModalProps> = ({ 

@@ -10,6 +10,7 @@ interface UserIntelligenceRowProps {
         email: string;
         full_name?: string;
         created_at: string;
+        updated_at?: string;
     };
     isSelected: boolean;
     onClick: () => void;
@@ -47,7 +48,7 @@ export const UserIntelligenceRow: React.FC<UserIntelligenceRowProps> = ({ user, 
                 </p>
                 <div className="flex items-center gap-3 text-[9px] font-bold text-slate-500 uppercase tracking-widest">
                     <Clock className="w-3 h-3 opacity-50" />
-                    <span>Last Activity {new Date(user.updated_at).toLocaleDateString()}</span>
+                    <span>Last Activity {new Date(user.updated_at || user.created_at).toLocaleDateString()}</span>
                 </div>
             </div>
         </button>
