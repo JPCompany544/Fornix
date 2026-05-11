@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useState } from 'react';
-import { executeTrade } from '@/lib/tradeActions';
-import { Loader2, Zap, BarChart2 } from 'lucide-react';
+import React from 'react';
+import Link from 'next/link';
+import { Zap, BarChart2 } from 'lucide-react';
 
 interface TopGainersProps {
     portfolioId?: string;
 }
 
 const TopGainers: React.FC<TopGainersProps> = ({ portfolioId }) => {
-    const [isTrading, setIsTrading] = useState<string | null>(null);
 
     const gainers = [
         { name: 'Apple', symbol: 'AAPL', image: '/AppleLogo.svg', price: 182.63, change: '+1.24%' },
@@ -19,19 +18,6 @@ const TopGainers: React.FC<TopGainersProps> = ({ portfolioId }) => {
         { name: 'Tesla', symbol: 'TSLA', image: '/TeslaSymbol.svg', price: 193.57, change: '-0.42%' },
         { name: 'Amazon', symbol: 'AMZN', image: '/Amasonlogo.jpg', price: 174.45, change: '+0.95%' },
     ];
-
-    const handleQuickBuy = async (gainer: typeof gainers[0]) => {
-        if (!portfolioId || isTrading) return;
-        
-        setIsTrading(gainer.symbol);
-        try {
-            await executeTrade(portfolioId, gainer.symbol, 'buy', 1, gainer.price);
-        } catch (err: any) {
-            alert(err.message);
-        } finally {
-            setIsTrading(null);
-        }
-    };
 
     const infiniteGainers = [...gainers, ...gainers, ...gainers];
 
@@ -47,17 +33,12 @@ const TopGainers: React.FC<TopGainersProps> = ({ portfolioId }) => {
             <div className="flex items-center animate-scroll-slow hover:[animation-play-state:paused] whitespace-nowrap pl-[60px] md:pl-[180px]">
                 {infiniteGainers.map((gainer, i) => (
                     <div key={i} className="flex items-center shrink-0">
-                        <button 
-                            onClick={() => handleQuickBuy(gainer)}
-                            disabled={!!isTrading}
-                            className="flex items-center space-x-3 md:space-x-4 px-6 md:px-10 group/item transition-opacity hover:opacity-80 disabled:opacity-50"
+                        <Link 
+                            href={`/Dashboard/Market/${gainer.symbol}`}
+                            className="flex items-center space-x-3 md:space-x-4 px-6 md:px-10 group/item transition-opacity hover:opacity-80"
                         >
                             <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full bg-slate-50 border border-slate-100 overflow-hidden p-1.5 md:p-2 group-hover/item:scale-110 transition-transform">
-                                {isTrading === gainer.symbol ? (
-                                    <Loader2 className="w-3 h-3 md:w-4 md:h-4 animate-spin text-slate-400" />
-                                ) : (
-                                    <img src={gainer.image} alt={gainer.name} className="w-full h-full object-contain" />
-                                )}
+                                <img src={gainer.image} alt={gainer.name} className="w-full h-full object-contain" />
                             </div>
                             <div className="flex flex-col text-left">
                                 <div className="flex items-center gap-1.5 md:gap-2">
@@ -70,7 +51,7 @@ const TopGainers: React.FC<TopGainersProps> = ({ portfolioId }) => {
                                     <span className="text-[10px] md:text-[12px] text-slate-400 font-bold tracking-tight">${gainer.price}</span>
                                 </div>
                             </div>
-                        </button>
+                        </Link>
                         <div className="h-4 w-[1px] bg-slate-100" />
                     </div>
                 ))}
@@ -79,7 +60,7 @@ const TopGainers: React.FC<TopGainersProps> = ({ portfolioId }) => {
             {/* Floating Action Hint */}
             <div className="absolute right-4 z-20 hidden lg:group-hover:flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-full shadow-2xl animate-in fade-in slide-in-from-right-4">
                 <Zap className="w-3 h-3 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest">Quick Buy 1 Share</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">Market Analysis</span>
             </div>
 
             <style jsx>{`
