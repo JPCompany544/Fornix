@@ -456,10 +456,10 @@ export default function LandingPage() {
                     <Icon className="w-8 h-8" />
                   </div>
                   <span className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-900 text-white text-[10px] font-black flex items-center justify-center border-4 border-slate-50">
-                    {item.step}
+                    {step}
                   </span>
                 </div>
-                <h3 className="text-sm font-black uppercase tracking-widest text-slate-900">{item.title}</h3>
+                <h3 className="text-sm font-black uppercase tracking-widest text-slate-900">{title}</h3>
               </div>
             ))}
           </div>
@@ -481,8 +481,8 @@ export default function LandingPage() {
             ].map(({ icon: Icon, title, desc }, i) => (
               <div key={i} className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:border-slate-300 transition-all">
                 <div className="mb-4 text-slate-400"><Icon className="w-6 h-6" /></div>
-                <h4 className="text-lg font-black text-slate-950 mb-1">{item.title}</h4>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.desc}</p>
+                <h4 className="text-lg font-black text-slate-950 mb-1">{title}</h4>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{desc}</p>
               </div>
             ))}
           </div>
