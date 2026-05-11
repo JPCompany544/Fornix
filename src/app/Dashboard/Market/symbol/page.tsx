@@ -69,28 +69,30 @@ export default function StockDetailPage() {
         <div className="min-h-screen w-full bg-[#f8fbff] text-slate-900 pb-20">
             <FinorHeader />
 
-            <main className="max-w-[1600px] w-full mx-auto px-8 py-10 space-y-10">
+            <main className="max-w-[1600px] w-full mx-auto px-0 md:px-8 py-10 space-y-10">
                 {/* Back Link */}
-                <button 
-                    onClick={() => router.back()}
-                    className="flex items-center gap-3 text-[10px] font-black text-slate-400 hover:text-slate-900 uppercase tracking-widest transition-colors"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Market
-                </button>
+                <div className="px-6 md:px-0">
+                    <button 
+                        onClick={() => router.back()}
+                        className="flex items-center gap-3 text-[10px] font-black text-slate-400 hover:text-slate-900 uppercase tracking-widest transition-colors"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Back to Market
+                    </button>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                     {/* Main Header & Chart */}
                     <div className="lg:col-span-2 space-y-10">
                         {/* Title Section */}
-                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                        <div className="px-6 md:px-0 flex flex-col md:flex-row md:items-end justify-between gap-8">
                             <div className="flex items-center gap-8">
-                                <div className="w-24 h-24 bg-white rounded-[2rem] border border-slate-100 shadow-sm flex items-center justify-center p-4">
+                                <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl md:rounded-[2rem] border border-slate-100 shadow-sm flex items-center justify-center p-4">
                                     <img src={profile.logo} alt={profile.name} className="w-full h-full object-contain" />
                                 </div>
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-3">
-                                        <h1 className="text-4xl font-black text-slate-950 tracking-tight">{profile.name}</h1>
+                                        <h1 className="text-2xl md:text-4xl font-black text-slate-950 tracking-tight leading-tight">{profile.name}</h1>
                                         <span className="px-3 py-1 bg-slate-900 text-white text-[11px] font-black rounded-lg tracking-widest uppercase">{symbol}</span>
                                     </div>
                                     <div className="flex items-center gap-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
@@ -101,7 +103,7 @@ export default function StockDetailPage() {
                             </div>
 
                             <div className="flex flex-col items-start md:items-end space-y-2">
-                                <span className="text-5xl font-black text-slate-950 tracking-tight">${quote.current?.toFixed(2)}</span>
+                                <span className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight">${quote.current?.toFixed(2)}</span>
                                 <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest ${isPositive ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
                                     {isPositive ? <ArrowUpRight className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                                     {changePercent}%
@@ -110,10 +112,10 @@ export default function StockDetailPage() {
                         </div>
 
                         {/* Chart Container */}
-                        <div className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm min-h-[500px] flex flex-col">
-                            <div className="flex items-center justify-between mb-10">
+                        <div className="bg-white px-0 py-8 md:p-10 md:rounded-[3rem] border-y md:border border-slate-100 shadow-sm min-h-[500px] flex flex-col">
+                            <div className="px-6 md:px-0 flex items-center justify-between mb-10">
                                 <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Performance History</h3>
-                                <div className="flex gap-2 bg-slate-50 p-1.5 rounded-2xl">
+                                <div className="flex gap-2 bg-slate-50 p-1.5 rounded-2xl overflow-x-auto no-scrollbar">
                                     {[
                                         { label: '1D', value: 'D' },
                                         { label: '1W', value: '60' },
@@ -123,7 +125,7 @@ export default function StockDetailPage() {
                                         <button 
                                             key={t.value} 
                                             onClick={() => setRange(t.value)}
-                                            className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${range === t.value ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-100'}`}
+                                            className={`px-4 md:px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${range === t.value ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-100'}`}
                                         >
                                             {t.label}
                                         </button>
@@ -147,9 +149,9 @@ export default function StockDetailPage() {
                     </div>
 
                     {/* Sidebar: Trading & Stats */}
-                    <div className="lg:col-span-1 space-y-10">
+                    <div className="px-6 md:px-0 lg:col-span-1 space-y-10">
                         {/* Trading Terminal */}
-                        <div className="bg-slate-950 p-10 rounded-[3rem] shadow-2xl text-white relative overflow-hidden group">
+                        <div className="bg-slate-950 p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl text-white relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             
                             <div className="relative z-10 space-y-8">
@@ -186,7 +188,7 @@ export default function StockDetailPage() {
                         </div>
 
                         {/* Market Stats */}
-                        <div className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
+                        <div className="bg-white p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
                             <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Market Metrics</h3>
                             <div className="space-y-6">
                                 <div className="flex justify-between items-center">
