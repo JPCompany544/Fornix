@@ -449,11 +449,11 @@ export default function LandingPage() {
               { icon: Activity, title: "Monitoring", step: "03" },
               { icon: Play, title: "Execution", step: "04" },
               { icon: RefreshCw, title: "Optimize", step: "05" }
-            ].map((item, i) => (
+            ].map(({ icon: Icon, title, step }, i) => (
               <div key={i} className="flex flex-col items-center space-y-6">
                 <div className="relative">
                   <div className="w-20 h-20 rounded-3xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-400 hover:text-slate-900 hover:border-slate-900 transition-all">
-                    <item.icon className="w-8 h-8" />
+                    <Icon className="w-8 h-8" />
                   </div>
                   <span className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-900 text-white text-[10px] font-black flex items-center justify-center border-4 border-slate-50">
                     {item.step}
@@ -478,9 +478,9 @@ export default function LandingPage() {
               { icon: Puzzle, title: "Modular Architecture", desc: "Plug-and-play expansion." },
               { icon: Code2, title: "API Integrations", desc: "Automate complex ops." },
               { icon: Box, title: "Deployment Ready", desc: "Internal deployment." }
-            ].map((item, i) => (
+            ].map(({ icon: Icon, title, desc }, i) => (
               <div key={i} className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:border-slate-300 transition-all">
-                <div className="mb-4 text-slate-400"><item.icon className="w-6 h-6" /></div>
+                <div className="mb-4 text-slate-400"><Icon className="w-6 h-6" /></div>
                 <h4 className="text-lg font-black text-slate-950 mb-1">{item.title}</h4>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.desc}</p>
               </div>
